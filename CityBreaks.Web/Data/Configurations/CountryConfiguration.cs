@@ -14,5 +14,12 @@ public class CountryConfiguration : IEntityTypeConfiguration<Country>
 
         builder.Property(c => c.CountryCode)
             .HasColumnName("Code");
+
+        builder.HasData(
+            new Country { Id = 1, CountryCode = "ES", CountryName = "Spain" },
+            new Country { Id = 2, CountryCode = "FR", CountryName = "France" },
+            new Country { Id = 3, CountryCode = "BR", CountryName = "Brazil" },
+            new Country { Id = 4, CountryCode = "AR", CountryName = "Argentina" }
+        );
     }
 }
