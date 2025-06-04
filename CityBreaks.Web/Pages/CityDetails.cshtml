@@ -1,0 +1,15 @@
+@page "{name}"
+@model CityBreaks.Web.Pages.CityDetailsModel
+
+<h2>Cidade: @Model.City.Name</h2>
+<p class="fs-4">País: @Model.City.Country.CountryName</p>
+
+<h4>Propriedades:</h4>
+<ul>
+    @foreach (var prop in Model.City.Properties)
+    {
+        <li>@prop.Name – R$ @prop.PricePerNight</li>
+    }
+</ul>
+
+<a asp-page="/Index">Voltar</a>

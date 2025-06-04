@@ -10,8 +10,11 @@
     @foreach (var city in Model.Cities)
     {
         <div class="border-2 border-info border p-2 mb-1">
-            <h2>@city.Country.CountryName</h2>
-            <p>@city.Name</p>
+            <h2>
+                <a asp-page="/CityDetails" asp-route-name="@city.Name">
+                    @city.Name <span class="fs-5">- @city.Country.CountryName</span>
+                </a>
+            </h2>
             <ul class="list-unstyled">
                 @foreach (var property in city.Properties)
                 {
