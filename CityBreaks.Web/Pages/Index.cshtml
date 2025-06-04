@@ -4,7 +4,22 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<main>
+    <h1>Cidades Cadastradas</h1>
+
+    @foreach (var city in Model.Cities)
+    {
+        <div class="border-2 border-info border p-2 mb-1">
+            <h2>@city.Country.CountryName</h2>
+            <p>@city.Name</p>
+            <ul class="list-unstyled">
+                @foreach (var property in city.Properties)
+                {
+                    <li>
+                        @property.Name - R$ @property.PricePerNight
+                    </li>
+                }
+            </ul>
+        </div>
+    }
+</main>
