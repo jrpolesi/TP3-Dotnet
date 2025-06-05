@@ -8,7 +8,9 @@
 <ul>
     @foreach (var prop in Model.City.Properties)
     {
-        <li>@prop.Name – R$ @prop.PricePerNight</li>
+        <li>
+            @prop.Name – R$ @prop.PricePerNight <a asp-page="/EditProperty" asp-route-id="@prop.Id">Editar</a>
+        </li>
     }
 </ul>
 
