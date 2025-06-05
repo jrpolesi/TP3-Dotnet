@@ -10,7 +10,7 @@ public class CityService(CityBreaksContext context) : ICityService
     {
         return await context.Cities
             .Include(c => c.Country)
-            .Include(c => c.Properties)
+            .Include(c => c.Properties.Where(p => p.DeletedAt == null))
             .ToListAsync();
     }
 
@@ -18,7 +18,7 @@ public class CityService(CityBreaksContext context) : ICityService
     {
         return await context.Cities
                    .Include(c => c.Country)
-                   .Include(c => c.Properties)
+                   .Include(c => c.Properties.Where(p => p.DeletedAt == null))
                    .FirstOrDefaultAsync(c =>
                        EF.Functions.Collate(c.Name, "NOCASE") == name) ??
                throw new InvalidOperationException("Cidade não encontrada.");

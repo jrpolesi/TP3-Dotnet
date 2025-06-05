@@ -9,7 +9,19 @@
     @foreach (var prop in Model.City.Properties)
     {
         <li>
-            @prop.Name – R$ @prop.PricePerNight <a asp-page="/EditProperty" asp-route-id="@prop.Id">Editar</a>
+            @prop.Name – R$ @prop.PricePerNight
+            <a asp-page="/EditProperty" asp-route-id="@prop.Id">Editar</a>
+            <form
+                method="post"
+                asp-page-handler="Delete"
+                asp-route-id="@prop.Id"
+                asp-route-name="@Model.City.Name"
+                class="d-inline"
+            >
+                <button type="submit" class="btn btn-link p-0 align-baseline">
+                    Excluir
+                </button>
+            </form>
         </li>
     }
 </ul>

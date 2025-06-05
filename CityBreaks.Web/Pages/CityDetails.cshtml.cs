@@ -1,3 +1,4 @@
+using CityBreaks.Web.Data;
 using CityBreaks.Web.Models;
 using CityBreaks.Web.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -8,10 +9,12 @@ namespace CityBreaks.Web.Pages;
 public class CityDetailsModel : PageModel
 {
     private readonly ICityService _cityService;
+    private readonly CityBreaksContext _context;
 
-    public CityDetailsModel(ICityService cityService)
+    public CityDetailsModel(ICityService cityService, CityBreaksContext context)
     {
         _cityService = cityService;
+        _context = context;
     }
 
     public City City { get; set; }
@@ -30,5 +33,20 @@ public class CityDetailsModel : PageModel
         {
             return NotFound();
         }
+    }
+
+    public async Task<IActionResult> OnPostDeleteAsync(int id, string name)
+    {
+        var property = await _context.Properties.FindAsync(id);
+
+        if (property == null)
+        {
+            return NotFound();
+        }
+
+        property.DeletedAt = DateTime.UtcNow;
+        await _context.SaveChangesAsync();
+
+        return RedirectToPage(new { name = name });
     }
 }

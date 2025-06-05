@@ -19,4 +19,6 @@ public class Property
     public int CityId { get; set; }
     [ValidateNever]
     public City City { get; set; }
+    
+    public DateTime? DeletedAt { get; set; }
 }
